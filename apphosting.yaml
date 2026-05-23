@@ -1,0 +1,8 @@
+# Set the schema version of App Hosting config
+schemaVersion: v1beta1
+# Environment configurations section
+env:
+  # Map variable to value
+  - variable: VITE_GEMINI_API_KEY
+    # Bind secret key from Firebase Secret Manager
+    secret: VITE_GEMINI_API_KEY
