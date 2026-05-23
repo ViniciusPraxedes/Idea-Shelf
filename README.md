@@ -1,16 +1,61 @@
-# React + Vite
+<!-- Application main title heading -->
+# Idea Shelf
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<!-- Project description paragraph -->
+Idea Shelf is a web application to capture, organize, and structure your creative ideas.
 
-Currently, two official plugins are available:
+<!-- Features section heading -->
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<!-- Bullet point for capturing ideas -->
+- **Capture Ideas**: Quickly save and catalog thoughts with titles, tags, colors, and descriptions.
+<!-- Bullet point for rich text editing -->
+- **Rich Text Editor**: Use rich text editing tools powered by React Quill.
+<!-- Bullet point for AI formulation -->
+- **AI Idea Explainer**: Formulate and refine your descriptions using Google Gemini AI.
+<!-- Bullet point for drag-and-drop -->
+- **Drag and Drop**: Organize and prioritize ideas easily with built-in drag-and-drop support.
+<!-- Bullet point for search and filter -->
+- **Search & Filter**: Search ideas dynamically by title or tags, and filter active or archived ideas.
+<!-- Bullet point for dark mode -->
+- **Dark Mode**: Supports both clean modern light mode and dark mode.
 
-## React Compiler
+<!-- Local setup section heading -->
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<!-- Step 1 heading -->
+### 1. Installation
 
-## Expanding the ESLint configuration
+<!-- Command description for installing dependencies -->
+Install the required packages:
+<!-- Code block for installing packages -->
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<!-- Step 2 heading -->
+### 2. Environment Variables
+
+<!-- Description of the environment variable requirement -->
+Create a `.env` file in the root directory and add your Google Gemini API key:
+<!-- Code block showing env configuration -->
+```env
+# Google Gemini API key
+VITE_GEMINI_API_KEY=your_api_key_here
+```
+
+<!-- Step 3 heading -->
+### 3. Local Development
+
+<!-- Command description for starting local server -->
+Start the local Vite development server:
+<!-- Code block for starting server -->
+```bash
+npm run dev
+```
+
+<!-- Deployment section heading -->
+## Deployment
+
+<!-- Description of Firebase deployment -->
+This project is set up to be deployed on Firebase App Hosting. See the walkthrough for detailed integration steps.
