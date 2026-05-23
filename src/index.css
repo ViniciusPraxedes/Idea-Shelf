@@ -1,0 +1,852 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
+
+:root {
+  --bg-color: #f7f9fb;
+  --surface-color: rgba(255, 255, 255, 0.7);
+  --primary-color: #3525cd;
+  --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #3525cd 100%);
+  --secondary-color: #831ada;
+  --text-primary: #191c1e;
+  --text-secondary: #464555;
+  --border-color: rgba(255, 255, 255, 0.3);
+  --border-focus: #3525cd;
+  --danger-color: #ba1a1a;
+  --danger-hover: #93000a;
+  --spark-color: #f59e0b;
+}
+
+.dark {
+  --bg-color: #0f172a;
+  --surface-color: rgba(30, 41, 59, 0.7);
+  --primary-color: #6366f1;
+  --primary-gradient: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+  --secondary-color: #c084fc;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-focus: #818cf8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient Glows for Depth */
+body::before, body::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -1;
+  opacity: 0.4;
+}
+
+body::before {
+  width: 600px;
+  height: 600px;
+  background: var(--primary-color);
+  top: -100px;
+  left: -200px;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  background: var(--secondary-color);
+  bottom: 10%;
+  right: -100px;
+}
+
+#root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px; /* Desktop outer margin */
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px; /* Mobile outer margin */
+  }
+}
+
+/* Glassmorphism Cards */
+.card {
+  /* Set card background color variable */
+  background: var(--surface-color);
+  /* Apply glassmorphism backdrop blur filter */
+  backdrop-filter: blur(32px);
+  /* Apply webkit fallback backdrop blur filter */
+  -webkit-backdrop-filter: blur(32px);
+  /* Set border radius for squircle card shape */
+  border-radius: 24px;
+  /* Set padding inside the card */
+  padding: 2rem;
+  /* Set card border color dynamically */
+  border: 1px solid var(--border-color);
+  /* Disable heavy card drop shadows */
+  box-shadow: none;
+  /* Set transition animations for hover effects */
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Card hover style */
+.card:hover {
+  /* Shift card upwards on hover */
+  transform: translateY(-2px);
+  /* Set bright transparent white border on hover for light mode */
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Dark mode override for card hover border */
+.dark .card:hover {
+  /* Set card border color on hover in dark mode */
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Button base class */
+.btn {
+  /* Set inline flex display */
+  display: inline-flex;
+  /* Align items center */
+  align-items: center;
+  /* Center content horizontally */
+  justify-content: center;
+  /* Apply padding */
+  padding: 0.75rem 1.5rem;
+  /* Set font family */
+  font-family: 'Inter', sans-serif;
+  /* Set font weight */
+  font-weight: 600;
+  /* Set border radius for pill shape */
+  border-radius: 9999px;
+  /* Set border to 1px solid transparent to fix alignment height */
+  border: 1px solid transparent;
+  /* Use pointer cursor */
+  cursor: pointer;
+  /* Apply transitions */
+  transition: all 0.2s ease;
+  /* Set font size */
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: 0 0 15px rgba(53, 37, 205, 0.3); /* Subtle outer glow */
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #3525cd 0%, #21129b 100%);
+  box-shadow: 0 0 25px rgba(53, 37, 205, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Ghost glass style */
+.btn-ghost {
+  /* Set light dark transparent background for visibility */
+  background: rgba(0, 0, 0, 0.05);
+  /* Apply backdrop filter for glassmorphism */
+  backdrop-filter: blur(10px);
+  /* Set transparent dark border for shape outline */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  /* Set primary text color */
+  color: var(--primary-color);
+  /* Close .btn-ghost style */
+}
+
+/* Hover style for ghost buttons */
+.btn-ghost:hover {
+  /* Increase background opacity on hover */
+  background: rgba(0, 0, 0, 0.08);
+  /* Close .btn-ghost:hover style */
+}
+
+/* Dark mode override for ghost style */
+.dark .btn-ghost {
+  /* Set light transparent background for dark mode */
+  background: rgba(255, 255, 255, 0.08);
+  /* Set light transparent border for dark mode */
+  border-color: rgba(255, 255, 255, 0.15);
+  /* Close .dark .btn-ghost style */
+}
+
+/* Hover override in dark mode */
+.dark .btn-ghost:hover {
+  /* Increase background opacity on hover in dark mode */
+  background: rgba(255, 255, 255, 0.15);
+  /* Close .dark .btn-ghost:hover style */
+}
+
+.btn-danger {
+  background: var(--danger-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background: var(--danger-hover);
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 16px; /* rounded-lg */
+  border: 2px solid transparent;
+  background-color: rgba(0, 0, 0, 0.03);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+textarea.input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Header styling */
+.header {
+  text-align: center;
+  margin-bottom: 80px; /* section-gap */
+  animation: fadeInDown 0.5s ease-out;
+}
+
+.header h1 {
+  font-size: 56px; /* display-lg */
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 36px;
+  }
+  .header {
+    margin-bottom: 40px;
+  }
+}
+
+.header p {
+  color: var(--text-secondary);
+  font-size: 18px; /* body-lg */
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* React Quill Overrides */
+.ql-toolbar.ql-snow {
+  border: 2px solid transparent !important;
+  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.ql-container.ql-snow {
+  border: 2px solid transparent !important;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.quill-focus .ql-container.ql-snow {
+  border-color: var(--border-focus) !important;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .ql-toolbar.ql-snow,
+.dark .ql-container.ql-snow {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: transparent !important;
+}
+
+.dark .quill-focus .ql-container.ql-snow {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: var(--border-focus) !important;
+}
+
+.ql-editor {
+  min-height: 120px;
+}
+
+/* Header bar styling */
+/* Header bar styling */
+.header-bar {
+  /* Set flexbox layout */
+  display: flex;
+  /* Space out items */
+  justify-content: space-between;
+  /* Center items vertically */
+  align-items: center;
+  /* Margin at the bottom */
+  margin-bottom: 2rem;
+  /* Reduce vertical padding and remove horizontal padding */
+  padding: 0.5rem 0;
+  /* Transparent background */
+  background: transparent;
+  /* Remove border completely */
+  border: none;
+  /* Remove box shadow */
+  box-shadow: none;
+  /* Remove backdrop filter */
+  backdrop-filter: none;
+  /* Close .header-bar styling */
+}
+
+/* Style class for welcome message */
+.header-welcome {
+  /* Set text color secondary */
+  color: var(--text-secondary);
+  /* Set font weight to 500 */
+  font-weight: 500;
+  /* No left padding needed when header bar has no background */
+  padding-left: 0;
+  /* End of header-welcome selector rules */
+}
+
+/* Style class for header action buttons container */
+.header-actions {
+  /* Set layout display to flex */
+  display: flex;
+  /* Add spacing gap between buttons */
+  gap: 0.5rem;
+  /* End of header-actions selector rules */
+}
+
+/* Styling for header-specific buttons */
+.btn-header {
+  /* Inline-flex layout */
+  display: inline-flex;
+  /* Align items center */
+  align-items: center;
+  /* Center content horizontally */
+  justify-content: center;
+  /* Compact padding for a smaller button */
+  padding: 0.5rem 1rem;
+  /* Font family inherit */
+  font-family: inherit;
+  /* Font size smaller */
+  font-size: 0.875rem;
+  /* Font weight semi-bold */
+  font-weight: 500;
+  /* Rounded border radius */
+  border-radius: 999px;
+  /* Transparent border by default */
+  border: 1px solid transparent;
+  /* Cursor pointer */
+  cursor: pointer;
+  /* Text color secondary */
+  color: var(--text-secondary);
+  /* Transparent background */
+  background: transparent;
+  /* Transition for smooth state changes */
+  transition: all 0.2s ease;
+  /* End of btn-header selector rules */
+}
+
+/* Hover style for header-specific buttons */
+.btn-header:hover {
+  /* Primary text color on hover */
+  color: var(--primary-color);
+  /* Subtle dark transparent background */
+  background: rgba(0, 0, 0, 0.05);
+  /* End of btn-header hover selector rules */
+}
+
+/* Dark mode hover style for header-specific buttons */
+.dark .btn-header:hover {
+  /* Light transparent background in dark mode */
+  background: rgba(255, 255, 255, 0.08);
+  /* End of dark btn-header hover selector rules */
+}
+
+/* Container for search input and action buttons */
+.search-actions-container {
+  /* Set flexbox layout */
+  display: flex;
+  /* Space between items */
+  justify-content: space-between;
+  /* Center vertically */
+  align-items: center;
+  /* Margin below container */
+  margin-bottom: 2rem;
+  /* Spacing between child groups */
+  gap: 1rem;
+  /* Allow items to wrap */
+  flex-wrap: wrap;
+  /* Close .search-actions-container style */
+}
+
+/* Search input itself */
+.search-input {
+  /* Let it grow to fill space */
+  flex: 1;
+  /* Minimum width on desktop */
+  min-width: 300px;
+  /* Close .search-input style */
+}
+
+/* Actions buttons group */
+.actions-group {
+  /* Set flexbox layout */
+  display: flex;
+  /* Spacing between buttons */
+  gap: 1rem;
+  /* Close .actions-group style */
+}
+
+/* Responsive query for mobile screens */
+@media (max-width: 600px) {
+  /* Mobile header bar overrides */
+  .header-bar {
+    /* Stack items vertically on mobile */
+    flex-direction: column;
+    /* Spacing between user name and logout */
+    gap: 0.5rem;
+    /* Remove padding on mobile */
+    padding: 0;
+    /* End of header-bar mobile overrides */
+  }
+
+  /* Center welcome message on mobile viewports */
+  .header-welcome {
+    /* Reset left padding on mobile */
+    padding-left: 0;
+    /* Center the welcome text horizontally */
+    text-align: center;
+    /* End of header-welcome mobile overrides */
+  }
+
+  /* Adjust actions container layout on mobile */
+  .header-actions {
+    /* Set full width */
+    width: 100%;
+    /* Distribute items equally and center them */
+    justify-content: center;
+    /* End of header-actions mobile overrides */
+  }
+
+  /* Stack search input and button group on mobile */
+  .search-actions-container {
+    /* Stack vertically */
+    flex-direction: column;
+    /* Align items stretch to fill full width */
+    align-items: stretch;
+    /* Close .search-actions-container mobile overrides */
+  }
+
+  /* Make search input full width on mobile */
+  .search-input {
+    /* Width 100% */
+    width: 100%;
+    /* Close .search-input mobile overrides */
+  }
+
+  /* Actions group layout on mobile */
+  .actions-group {
+    /* Width 100% */
+    width: 100%;
+    /* Close .actions-group mobile overrides */
+  }
+
+  /* Adjust buttons inside the group to split space equally */
+  .actions-group .btn {
+    /* Make buttons grow equally */
+    flex: 1;
+    /* Close .actions-group .btn mobile overrides */
+  }
+
+  /* Mobile card adjustments */
+  .card {
+    /* Reduce card padding on mobile */
+    padding: 1.25rem;
+    /* Close .card mobile overrides */
+  }
+
+  /* Mobile heading h1 */
+  h1 {
+    /* Smaller h1 size for mobile screens */
+    font-size: 32px !important;
+    /* Close h1 mobile overrides */
+  }
+
+  /* Mobile heading h2 */
+  h2 {
+    /* Smaller h2 size for mobile screens */
+    font-size: 24px !important;
+    /* Close h2 mobile overrides */
+  }
+
+  /* Drag handle adjustments */
+  .drag-handle {
+    /* Prevent default touch gestures for drag handle */
+    touch-action: none !important;
+    /* Close .drag-handle overrides */
+  }
+  /* Close media query */
+}
+/* Style class for tag pills inside the cards */
+.tag {
+  /* Semi-transparent dark background */
+  background: rgba(0, 0, 0, 0.05);
+  /* Primary text color */
+  color: var(--text-primary);
+  /* Vertical and horizontal padding */
+  padding: 0.25rem 0.75rem;
+  /* Rounded pill shape border radius */
+  border-radius: 999px;
+  /* Text size */
+  font-size: 12px;
+  /* Font weight semi-bold */
+  font-weight: 600;
+  /* Interactivity cursor */
+  cursor: pointer;
+  /* Smooth transform and color transitions */
+  transition: all 0.2s ease;
+  /* End of tag selector rules */
+}
+
+/* Hover state styling for tag pills */
+.tag:hover {
+  /* Slightly darker background on hover */
+  background: rgba(0, 0, 0, 0.1);
+  /* Shift up slightly on hover */
+  transform: translateY(-1px);
+  /* End of tag hover selector rules */
+}
+
+/* Dark mode overrides for tag pills */
+.dark .tag {
+  /* Semi-transparent light background in dark mode */
+  background: rgba(255, 255, 255, 0.08);
+  /* End of dark tag selector rules */
+}
+
+/* Dark mode hover overrides for tag pills */
+.dark .tag:hover {
+  /* Slightly lighter background on dark hover */
+  background: rgba(255, 255, 255, 0.15);
+  /* End of dark tag hover selector rules */
+}
+
+/* Card description container styles to handle layout and text wrapping */
+.card-description {
+  /* Set the secondary text color using custom property */
+  color: var(--text-secondary);
+  /* Apply margin at the bottom for spacing */
+  margin-bottom: 1.5rem;
+  /* Grow and flex to occupy available card space */
+  flex: 1;
+  /* Set font size for description readability */
+  font-size: 16px;
+  /* Wrap extremely long words or text chains */
+  overflow-wrap: break-word;
+  /* Support older browser wrapping behaviors */
+  word-wrap: break-word;
+  /* Break punctuation sequences and long words to prevent overflow */
+  word-break: break-word;
+/* Close card-description selector rules */
+}
+
+/* Styling overrides for compact form layout */
+.idea-form-compact {
+  /* Restrict maximum width of form card */
+  max-width: 900px;
+  /* Centering form container with auto margin */
+  margin: 0 auto 2rem auto;
+/* Close idea-form-compact style rules */
+}
+
+/* Compact heading for the form card */
+.form-title {
+  /* Override bottom margin for compact fit */
+  margin-bottom: 1.5rem !important;
+  /* Set compact title font size */
+  font-size: 28px !important;
+/* Close form-title style rules */
+}
+
+/* CSS Grid layout for form fields on larger viewports */
+@media (min-width: 768px) {
+  /* Set layout of form grid container */
+  .form-grid {
+    /* Enable css grid layout */
+    display: grid;
+    /* Divide grid into two equal columns */
+    grid-template-columns: 1fr 1fr;
+    /* Space out grid columns and rows */
+    gap: 2rem;
+    /* Align grid items to start vertically */
+    align-items: start;
+    /* Spacing at the bottom of the grid */
+    margin-bottom: 1.5rem;
+  /* Close form-grid style rules */
+  }
+/* Close min-width media query rule */
+}
+
+/* Margin spacing class for inputs form group */
+.form-group {
+  /* Small bottom margin for compact spacing */
+  margin-bottom: 1.25rem;
+/* Close form-group style rules */
+}
+
+/* Spacing layout specifically for color picker group */
+.form-group-color {
+  /* Spacing below color picker element */
+  margin-bottom: 1rem;
+/* Close form-group-color style rules */
+}
+
+/* Flexbox container wrapping predefined color buttons */
+.color-picker-container {
+  /* Enable flex container layout */
+  display: flex;
+  /* Add gap space between buttons */
+  gap: 0.5rem;
+  /* Enable wrapping of color choices */
+  flex-wrap: wrap;
+/* Close color-picker-container style rules */
+}
+
+/* Styling for predefined color button pills */
+.color-btn {
+  /* Fixed button width */
+  width: 30px;
+  /* Fixed button height */
+  height: 30px;
+  /* Shape into a circle */
+  border-radius: 50%;
+  /* Disable browser outline ring */
+  outline: none;
+  /* Display pointer cursor */
+  cursor: pointer;
+  /* Smooth scale transform transition */
+  transition: all 0.2s ease;
+/* Close color-btn style rules */
+}
+
+/* Form actions footer bar styling */
+.form-actions {
+  /* Flexbox layout container */
+  display: flex;
+  /* Spacing between buttons */
+  gap: 1rem;
+  /* Push buttons to right alignment */
+  justify-content: flex-end;
+  /* Top padding space */
+  padding-top: 1rem;
+  /* Light separation top border line using dynamic border color variable */
+  border-top: 1px solid var(--border-color);
+/* Close form-actions style rules */
+}
+
+/* Dark mode input focus style */
+.dark .input:focus {
+  /* Set dark transparent background on focus to keep text readable */
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode placeholder override for ReactQuill rich editor */
+.dark .ql-editor.ql-blank::before {
+  /* Use secondary text color variable with importance override */
+  color: var(--text-secondary) !important;
+}
+
+/* Style for AI explanation button */
+.btn-ai-explain {
+  /* Set inline flex layout display */
+  display: inline-flex;
+  /* Align items center vertically */
+  align-items: center;
+  /* Add gap between emoji and text */
+  gap: 0.5rem;
+  /* Padding top and bottom, left and right */
+  padding: 0.35rem 0.85rem;
+  /* Small font size for secondary action button */
+  font-size: 0.875rem;
+  /* Font weight semi-bold */
+  font-weight: 600;
+  /* Border radius for pill shape */
+  border-radius: 9999px;
+  /* Pointer cursor interactability */
+  cursor: pointer;
+  /* Inherit font family */
+  font-family: inherit;
+  /* Border with transparent value initially */
+  border: 1px solid rgba(53, 37, 205, 0.2);
+  /* Text color secondary style using custom variable */
+  color: var(--primary-color);
+  /* Clear default background color to transparent */
+  background: rgba(255, 255, 255, 0.6);
+  /* Backdrop blur for glassmorphism */
+  backdrop-filter: blur(8px);
+  /* Smooth transition animations for hover effects */
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Avoid outline default border box shadow on focus */
+  outline: none;
+/* Close btn-ai-explain selector */
+}
+
+/* Hover selector for AI explain button */
+.btn-ai-explain:hover:not(:disabled) {
+  /* Scale up button slightly on hover */
+  transform: translateY(-1px);
+  /* Add indigo outer box shadow glow on hover */
+  box-shadow: 0 0 12px rgba(79, 70, 229, 0.25);
+  /* Set background color transparent white */
+  background: rgba(255, 255, 255, 0.95);
+  /* Change border color on hover */
+  border-color: rgba(53, 37, 205, 0.5);
+/* Close btn-ai-explain hover */
+}
+
+/* Dark mode overrides for AI explain button */
+.dark .btn-ai-explain {
+  /* White text color in dark mode */
+  color: #fff;
+  /* Border color for dark theme outline */
+  border-color: rgba(255, 255, 255, 0.15);
+  /* Semi-transparent dark background */
+  background: rgba(30, 41, 59, 0.6);
+/* Close dark btn-ai-explain */
+}
+
+/* Dark mode hover overrides for AI explain button */
+.dark .btn-ai-explain:hover:not(:disabled) {
+  /* Set background transparent black hover */
+  background: rgba(30, 41, 59, 0.9);
+  /* Set border color hover dark */
+  border-color: rgba(255, 255, 255, 0.35);
+  /* Box shadow outer glow in dark mode */
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+/* Close dark btn-ai-explain hover */
+}
+
+/* Disabled and loading states for AI button */
+.btn-ai-explain:disabled {
+  /* Normal cursor */
+  cursor: not-allowed;
+  /* Reduce opacity */
+  opacity: 0.7;
+  /* Clear box shadow */
+  box-shadow: none;
+  /* Shimmer background animation */
+  animation: ai-pulse 1.5s infinite ease-in-out;
+/* Close btn-ai-explain disabled */
+}
+
+/* CSS Keyframes for shimmer pulse animation */
+@keyframes ai-pulse {
+  /* Start scale and opacity */
+  0% {
+    /* Scale at normal */
+    transform: scale(1);
+    /* Half opacity */
+    opacity: 0.7;
+  /* Close keyframe start */
+  }
+  /* Mid point scale and opacity */
+  50% {
+    /* Scale up slightly */
+    transform: scale(0.98);
+    /* Higher opacity */
+    opacity: 1;
+  /* Close keyframe mid */
+  }
+  /* End scale and opacity */
+  100% {
+    /* Scale at normal */
+    transform: scale(1);
+    /* Half opacity */
+    opacity: 0.7;
+  /* Close keyframe end */
+  }
+/* Close keyframe rules */
+}
+
+/* Rotating spark animation */
+.spark-spinner {
+  /* Set block inline display */
+  display: inline-block;
+  /* CSS keyframes rotation animation */
+  animation: spin 1s linear infinite;
+/* Close spark-spinner */
+}
+
+/* CSS Keyframes for spin rotation */
+@keyframes spin {
+  /* From zero rotation angle */
+  from {
+    /* 0 degrees rotation */
+    transform: rotate(0deg);
+  /* Close keyframe start */
+  }
+  /* To full rotation angle */
+  to {
+    /* 360 degrees rotation */
+    transform: rotate(360deg);
+  /* Close keyframe end */
+  }
+/* Close keyframe rules */
+}
+
