@@ -16,7 +16,9 @@ export default defineConfig({
     // Parse the port number from environment variables or default to 8080
     port: parseInt(process.env.PORT || '8080', 10),
     // Bind to all available network host interfaces (0.0.0.0)
-    host: true
+    host: true,
+    // Allow any host header to connect to the preview server
+    allowedHosts: 'all'
     // Close the preview server properties object
   }
   // Close the defineConfig configuration object
