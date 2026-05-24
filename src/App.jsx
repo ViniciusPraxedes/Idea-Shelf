@@ -125,7 +125,7 @@ function App() {
       {!user ? (
         <Login />
       ) : (
-        // Main container wrapper for authenticated layout
+        /* Main container wrapper for authenticated layout */
         <div className="container">
           {/* Render header element conditionally if showForm is false */}
           {!showForm && (
