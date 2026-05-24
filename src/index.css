@@ -91,17 +91,44 @@ h1, h2, h3 {
   letter-spacing: -0.02em;
 }
 
+/* Container selector */
 .container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 48px; /* Desktop outer margin */
+  /* Set width of container to 100% */
   width: 100%;
+  /* Restrict the container layout to a mobile width constraint */
+  max-width: 480px;
+  /* Centering container in the viewport layout */
+  margin: 0 auto;
+  /* Add padding for container spacing on mobile */
+  padding: 20px;
+  /* Ensure container layout has box sizing rules */
+  box-sizing: border-box;
+/* Close container selector */
 }
 
-@media (max-width: 768px) {
+/* Device simulation styling for desktop screens */
+@media (min-width: 481px) {
+  /* Inner container simulation styles */
   .container {
-    padding: 20px; /* Mobile outer margin */
+    /* Style container background as card surface style */
+    background: var(--surface-color);
+    /* Glassmorphism backdrop filter */
+    backdrop-filter: blur(32px);
+    /* Webkit fallback filter for glassmorphism */
+    -webkit-backdrop-filter: blur(32px);
+    /* Rounded corners to simulate mobile phone frame */
+    border-radius: 40px;
+    /* Soft border outline matching design theme */
+    border: 1px solid var(--border-color);
+    /* Premium deep drop shadow overlay */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    /* Add top and bottom margin spacing on desktop */
+    margin: 40px auto;
+    /* Set minimum height of the mockup container device */
+    min-height: calc(100vh - 80px);
+  /* Close simulated container selector */
   }
+/* Close min-width media query wrapper */
 }
 
 /* Glassmorphism Cards */
@@ -114,8 +141,8 @@ h1, h2, h3 {
   -webkit-backdrop-filter: blur(32px);
   /* Set border radius for squircle card shape */
   border-radius: 24px;
-  /* Set padding inside the card */
-  padding: 2rem;
+  /* Set padding inside the card for mobile devices */
+  padding: 1.25rem;
   /* Set card border color dynamically */
   border: 1px solid var(--border-color);
   /* Disable heavy card drop shadows */
@@ -245,32 +272,39 @@ textarea.input {
 }
 
 /* Header styling */
+/* Header container selector */
 .header {
+  /* Center align text in header */
   text-align: center;
-  margin-bottom: 80px; /* section-gap */
+  /* Set bottom margin below header */
+  margin-bottom: 32px;
+  /* Apply animation */
   animation: fadeInDown 0.5s ease-out;
+/* Close header container styling */
 }
 
+/* Header heading text selector */
 .header h1 {
-  font-size: 56px; /* display-lg */
+  /* Set compact mobile-friendly heading font size */
+  font-size: 32px;
+  /* Gradient text background color */
   background: var(--primary-gradient);
+  /* Webkit clip background for text gradient styling */
   -webkit-background-clip: text;
+  /* Webkit text color fill transparent */
   -webkit-text-fill-color: transparent;
+  /* Set margin under the heading */
   margin-bottom: 0.5rem;
+/* Close header heading styling */
 }
 
-@media (max-width: 768px) {
-  .header h1 {
-    font-size: 36px;
-  }
-  .header {
-    margin-bottom: 40px;
-  }
-}
-
+/* Header paragraph description selector */
 .header p {
+  /* Set text color secondary */
   color: var(--text-secondary);
-  font-size: 18px; /* body-lg */
+  /* Set paragraph font size */
+  font-size: 16px;
+/* Close header paragraph styling */
 }
 
 /* Animations */
@@ -335,18 +369,22 @@ textarea.input {
 }
 
 /* Header bar styling */
-/* Header bar styling */
+/* Header bar row styling */
 .header-bar {
-  /* Set flexbox layout */
+  /* Set layout display to flex */
   display: flex;
+  /* Stack items vertically by default */
+  flex-direction: column;
+  /* Add gap space between user info and actions */
+  gap: 0.5rem;
   /* Space out items */
   justify-content: space-between;
   /* Center items vertically */
   align-items: center;
   /* Margin at the bottom */
   margin-bottom: 2rem;
-  /* Reduce vertical padding and remove horizontal padding */
-  padding: 0.5rem 0;
+  /* No vertical padding */
+  padding: 0;
   /* Transparent background */
   background: transparent;
   /* Remove border completely */
@@ -355,7 +393,7 @@ textarea.input {
   box-shadow: none;
   /* Remove backdrop filter */
   backdrop-filter: none;
-  /* Close .header-bar styling */
+/* Close header-bar styling */
 }
 
 /* Style class for welcome message */
@@ -364,9 +402,11 @@ textarea.input {
   color: var(--text-secondary);
   /* Set font weight to 500 */
   font-weight: 500;
-  /* No left padding needed when header bar has no background */
+  /* Center the welcome text horizontally */
+  text-align: center;
+  /* No left padding needed */
   padding-left: 0;
-  /* End of header-welcome selector rules */
+/* Close header-welcome style rules */
 }
 
 /* Style class for header action buttons container */
@@ -375,7 +415,11 @@ textarea.input {
   display: flex;
   /* Add spacing gap between buttons */
   gap: 0.5rem;
-  /* End of header-actions selector rules */
+  /* Set full width */
+  width: 100%;
+  /* Center actions horizontally */
+  justify-content: center;
+/* Close header-actions style rules */
 }
 
 /* Styling for header-specific buttons */
@@ -406,7 +450,7 @@ textarea.input {
   background: transparent;
   /* Transition for smooth state changes */
   transition: all 0.2s ease;
-  /* End of btn-header selector rules */
+/* Close btn-header selector rules */
 }
 
 /* Hover style for header-specific buttons */
@@ -415,140 +459,75 @@ textarea.input {
   color: var(--primary-color);
   /* Subtle dark transparent background */
   background: rgba(0, 0, 0, 0.05);
-  /* End of btn-header hover selector rules */
+/* Close btn-header hover selector rules */
 }
 
 /* Dark mode hover style for header-specific buttons */
 .dark .btn-header:hover {
   /* Light transparent background in dark mode */
   background: rgba(255, 255, 255, 0.08);
-  /* End of dark btn-header hover selector rules */
+/* Close dark btn-header hover selector rules */
 }
 
 /* Container for search input and action buttons */
 .search-actions-container {
   /* Set flexbox layout */
   display: flex;
-  /* Space between items */
-  justify-content: space-between;
-  /* Center vertically */
-  align-items: center;
+  /* Stack vertically by default */
+  flex-direction: column;
+  /* Align items stretch to fill full width */
+  align-items: stretch;
   /* Margin below container */
   margin-bottom: 2rem;
   /* Spacing between child groups */
   gap: 1rem;
-  /* Allow items to wrap */
-  flex-wrap: wrap;
-  /* Close .search-actions-container style */
+/* Close search-actions-container style */
 }
 
 /* Search input itself */
 .search-input {
-  /* Let it grow to fill space */
-  flex: 1;
-  /* Minimum width on desktop */
-  min-width: 300px;
-  /* Close .search-input style */
+  /* Set search input width to 100% */
+  width: 100%;
+/* Close search-input style */
 }
 
 /* Actions buttons group */
 .actions-group {
   /* Set flexbox layout */
   display: flex;
+  /* Set actions group width to 100% */
+  width: 100%;
   /* Spacing between buttons */
   gap: 1rem;
-  /* Close .actions-group style */
+/* Close actions-group style */
 }
 
-/* Responsive query for mobile screens */
-@media (max-width: 600px) {
-  /* Mobile header bar overrides */
-  .header-bar {
-    /* Stack items vertically on mobile */
-    flex-direction: column;
-    /* Spacing between user name and logout */
-    gap: 0.5rem;
-    /* Remove padding on mobile */
-    padding: 0;
-    /* End of header-bar mobile overrides */
-  }
+/* Adjust buttons inside the group to split space equally */
+.actions-group .btn {
+  /* Make buttons grow equally */
+  flex: 1;
+/* Close actions-group btn style */
+}
 
-  /* Center welcome message on mobile viewports */
-  .header-welcome {
-    /* Reset left padding on mobile */
-    padding-left: 0;
-    /* Center the welcome text horizontally */
-    text-align: center;
-    /* End of header-welcome mobile overrides */
-  }
+/* Global h1 elements style */
+h1 {
+  /* Set font size for general h1 tags */
+  font-size: 32px !important;
+/* Close h1 styles */
+}
 
-  /* Adjust actions container layout on mobile */
-  .header-actions {
-    /* Set full width */
-    width: 100%;
-    /* Distribute items equally and center them */
-    justify-content: center;
-    /* End of header-actions mobile overrides */
-  }
+/* Global h2 elements style */
+h2 {
+  /* Set font size for general h2 tags */
+  font-size: 24px !important;
+/* Close h2 styles */
+}
 
-  /* Stack search input and button group on mobile */
-  .search-actions-container {
-    /* Stack vertically */
-    flex-direction: column;
-    /* Align items stretch to fill full width */
-    align-items: stretch;
-    /* Close .search-actions-container mobile overrides */
-  }
-
-  /* Make search input full width on mobile */
-  .search-input {
-    /* Width 100% */
-    width: 100%;
-    /* Close .search-input mobile overrides */
-  }
-
-  /* Actions group layout on mobile */
-  .actions-group {
-    /* Width 100% */
-    width: 100%;
-    /* Close .actions-group mobile overrides */
-  }
-
-  /* Adjust buttons inside the group to split space equally */
-  .actions-group .btn {
-    /* Make buttons grow equally */
-    flex: 1;
-    /* Close .actions-group .btn mobile overrides */
-  }
-
-  /* Mobile card adjustments */
-  .card {
-    /* Reduce card padding on mobile */
-    padding: 1.25rem;
-    /* Close .card mobile overrides */
-  }
-
-  /* Mobile heading h1 */
-  h1 {
-    /* Smaller h1 size for mobile screens */
-    font-size: 32px !important;
-    /* Close h1 mobile overrides */
-  }
-
-  /* Mobile heading h2 */
-  h2 {
-    /* Smaller h2 size for mobile screens */
-    font-size: 24px !important;
-    /* Close h2 mobile overrides */
-  }
-
-  /* Drag handle adjustments */
-  .drag-handle {
-    /* Prevent default touch gestures for drag handle */
-    touch-action: none !important;
-    /* Close .drag-handle overrides */
-  }
-  /* Close media query */
+/* Drag handle adjustments */
+.drag-handle {
+  /* Prevent default touch gestures for drag handle */
+  touch-action: none !important;
+/* Close drag-handle overrides */
 }
 /* Style class for tag pills inside the cards */
 .tag {
@@ -615,8 +594,8 @@ textarea.input {
 
 /* Styling overrides for compact form layout */
 .idea-form-compact {
-  /* Restrict maximum width of form card */
-  max-width: 900px;
+  /* Restrict maximum width of form card to fill space */
+  max-width: 100%;
   /* Centering form container with auto margin */
   margin: 0 auto 2rem auto;
 /* Close idea-form-compact style rules */
@@ -631,23 +610,11 @@ textarea.input {
 /* Close form-title style rules */
 }
 
-/* CSS Grid layout for form fields on larger viewports */
-@media (min-width: 768px) {
-  /* Set layout of form grid container */
-  .form-grid {
-    /* Enable css grid layout */
-    display: grid;
-    /* Divide grid into two equal columns */
-    grid-template-columns: 1fr 1fr;
-    /* Space out grid columns and rows */
-    gap: 2rem;
-    /* Align grid items to start vertically */
-    align-items: start;
-    /* Spacing at the bottom of the grid */
-    margin-bottom: 1.5rem;
-  /* Close form-grid style rules */
-  }
-/* Close min-width media query rule */
+/* Column left selector in the form layout */
+.form-column-left {
+  /* Add bottom margin to separate columns when stacked */
+  margin-bottom: 1.5rem;
+/* Close form-column-left styling */
 }
 
 /* Margin spacing class for inputs form group */
@@ -857,3 +824,44 @@ textarea.input {
 /* Close keyframe rules */
 }
 
+/* Drag handle styling */
+.drag-handle {
+  /* Center items */
+  display: flex;
+  /* Align vertically */
+  align-items: center;
+  /* Align horizontally */
+  justify-content: center;
+  /* Circle shape */
+  border-radius: 50%;
+  /* Light transparent background */
+  background: rgba(0, 0, 0, 0.05);
+  /* Secondary text color */
+  color: var(--text-secondary);
+  /* Smooth transition */
+  transition: background-color 0.2s ease, color 0.2s ease;
+/* Close drag-handle rule */
+}
+
+/* Hover state for drag handle */
+.drag-handle:hover {
+  /* Darker transparent background on hover */
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Primary text color */
+  color: var(--text-primary);
+/* Close drag-handle:hover rule */
+}
+
+/* Dark mode override for drag handle */
+.dark .drag-handle {
+  /* Light transparent background in dark mode */
+  background: rgba(255, 255, 255, 0.08);
+/* Close dark drag-handle rule */
+}
+
+/* Dark mode hover state for drag handle */
+.dark .drag-handle:hover {
+  /* Lighter transparent background in dark mode hover */
+  background-color: rgba(255, 255, 255, 0.15);
+/* Close dark drag-handle:hover rule */
+}

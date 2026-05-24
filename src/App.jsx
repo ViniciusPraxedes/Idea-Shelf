@@ -1,5 +1,9 @@
 // Import the useState and useEffect hooks from react
 import { useState, useEffect } from 'react'
+// Import the Firebase authentication methods
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+// Import the local Firebase auth instance
+import { auth } from './services/firebase'
 // Import the Login component
 import Login from './components/Login'
 // Import the IdeaList component
@@ -13,6 +17,8 @@ import './index.css'
 function App() {
 // Initialize the user state to null
   const [user, setUser] = useState(null)
+// Initialize the auth loading state to true
+  const [authLoading, setAuthLoading] = useState(true)
 // Initialize the editingIdea state to null
   const [editingIdea, setEditingIdea] = useState(null)
 // Initialize the showForm state to false
@@ -47,17 +53,33 @@ function App() {
 // Add isDarkMode to the dependency array
   }, [isDarkMode])
 
-// Define a function to handle login
-  const handleLogin = (userData) => {
-// Set the user state with the mock user data
-    setUser(userData)
-// Close the handleLogin function
-  }
+// Use effect to listen for Firebase authentication state changes
+  useEffect(() => {
+// Subscribe to authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+// Set the user state to the current Firebase user
+      setUser(currentUser)
+// Set authentication loading to false once the initial check is complete
+      setAuthLoading(false)
+// Close the subscription callback
+    })
+// Cleanup the subscription when the component unmounts
+    return () => unsubscribe()
+// Provide an empty dependency array to run only on mount
+  }, [])
 
-// Define a function to handle logout
-  const handleLogout = () => {
-// Clear the user state
-    setUser(null)
+// Define an asynchronous function to handle logout
+  const handleLogout = async () => {
+// Try to sign out
+    try {
+// Call Firebase signOut
+      await signOut(auth)
+// Catch any errors
+    } catch (error) {
+// Log logout errors
+      console.error('Error signing out:', error)
+// Close the try-catch block
+    }
 // Close the handleLogout function
   }
 
@@ -90,37 +112,43 @@ function App() {
 // Close the handleFormCancel function
   }
 
+// Check if authentication is still loading
+  if (authLoading) {
+// Return a loading spinner or message while checking auth state
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Loading...</div>
+// Close the loading check
+  }
+
 // Return the JSX for the App component
   return (
     <>
       {!user ? (
-        <Login onLogin={handleLogin} />
+        <Login />
       ) : (
         // Main container wrapper for authenticated layout
         <div className="container">
-          {/* Render header element for the application */}
-          <header className="header">
-            {/* Header bar container using the responsive class */}
-            <div className="header-bar">
-              {/* Welcome text with styling classes */}
-              <span className="header-welcome">Welcome, {user.name}</span>
-              {/* Header actions container */}
-              <div className="header-actions">
-                {/* Theme toggle button element */}
-                <button className="btn-header" onClick={() => setIsDarkMode(!isDarkMode)} aria-label="Toggle dark mode">
-                  {/* Display text dynamically based on theme */}
-                  {isDarkMode ? '☀️ Light' : '🌙 Dark'}
-                {/* Close theme toggle button */}
-                </button>
-                {/* Logout button styled with header class */}
-                <button className="btn-header" onClick={handleLogout}>Logout</button>
-              {/* Close header actions division */}
+          {/* Render header element conditionally if showForm is false */}
+          {!showForm && (
+            <header className="header">
+              {/* Header bar container using the responsive class */}
+              <div className="header-bar">
+                {/* Welcome text with styling classes */}
+                <span className="header-welcome">Welcome, {user.displayName || user.email || 'User'}</span>
+                {/* Header actions container */}
+                <div className="header-actions">
+                  {/* Theme toggle button element */}
+                  <button className="btn-header" onClick={() => setIsDarkMode(!isDarkMode)} aria-label="Toggle dark mode">
+                    {/* Display text dynamically based on theme */}
+                    {isDarkMode ? '☀️ Light' : '🌙 Dark'}
+                  {/* Close theme toggle button */}
+                  </button>
+                  {/* Logout button styled with header class */}
+                  <button className="btn-header" onClick={handleLogout}>Logout</button>
+                {/* Close header actions division */}
+                </div>
+              {/* Close header bar division */}
               </div>
-            {/* Close header bar division */}
-            </div>
-            {/* Render app title and description only if showForm is false */}
-            {!showForm && (
-              // Use React fragment to group header text elements
+              {/* Use React fragment to group header text elements */}
               <>
                 {/* App title heading */}
                 <h1>Idea Shelf</h1>
@@ -128,11 +156,12 @@ function App() {
                 <p>Capture and structure your ideas.</p>
               {/* Close React fragment */}
               </>
-            )}
-          {/* Close header element */}
-          </header>
+            {/* Close header element */}
+            </header>
+          )}
 
-          <main>
+          {/* Add conditional styling to center the main content vertically when form is open */}
+          <main style={showForm ? { display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - 40px)', justifyContent: 'center' } : {}}>
             {showForm ? (
               <IdeaForm 
 // Pass the idea to edit

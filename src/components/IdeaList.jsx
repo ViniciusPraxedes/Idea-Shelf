@@ -343,52 +343,131 @@ const IdeaList = ({ onEdit, searchQuery = '', showArchived = false, onRefresh, o
               // Add responsive flex column layout for stable drag-and-drop
               style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'stretch' }}
             >
+              {/* Map filtered ideas array into draggable list elements */}
               {filteredIdeas.map((idea, index) => (
                 <Draggable key={idea.id} draggableId={idea.id} index={index}>
                   {(provided, snapshot) => (
                     <div 
-                      // Assign innerRef
+                      // Assign innerRef to connect drag element
                       ref={provided.innerRef} 
-                      // Spread draggable props
+                      // Spread draggable attributes to the card
                       {...provided.draggableProps} 
-                      // Spread drag handle props to allow dragging from anywhere on the card
-                      {...provided.dragHandleProps}
-                      // Apply classes
+                      // Set class names for active state and transition animations
                       className={`card ${snapshot.isDragging ? 'dragging' : 'animate-fade-in'}`} 
-                      // Apply styles, merging with draggable styles
+                      // Apply layout and state styles
                       style={{ 
-                        // Set display flex
+                        // Use flex layout to organize elements
                         display: 'flex', 
-                        // Set flex direction
+                        // Layout items in a column
                         flexDirection: 'column', 
-                        // Add colored top border accent matching the idea color
+                        // Set position relative to contain absolute drag handle
+                        position: 'relative',
+                        // Set top border colored accent line
                         borderTop: `4px solid ${idea.color || 'var(--primary-color)'}`,
-                        // Set cursor style based on dragging state
-                        cursor: snapshot.isDragging ? 'grabbing' : 'grab',
-                        // Scale slightly if dragging
+                        // Set scale factor when item is active
                         transform: snapshot.isDragging ? 'scale(1.02)' : 'none',
-                        // Boost z-index if dragging
+                        // Control layered depth on the page
                         zIndex: snapshot.isDragging ? 100 : 1,
-                        // Box shadow if dragging
+                        // Add shadow overlay during drag interaction
                         boxShadow: snapshot.isDragging ? '0 10px 30px rgba(0,0,0,0.1)' : 'none',
-                        // Set touch-action none for mobile touch optimization
-                        touchAction: 'none',
-                        // Merge with provided styles
+                        // Merge with react-beautiful-dnd system styling attributes
                         ...provided.draggableProps.style 
+                      // Close style object
                       }}
+                      // Close div opening tag
                     >
-                      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                        <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '24px', margin: 0 }}>
+                      <div 
+                        // Set layout of the card header container
+                        style={{ 
+                          // Enable flex layout for header items
+                          display: 'flex', 
+                          // Align items to start vertically
+                          alignItems: 'flex-start', 
+                          // Set gap spacing between title and drag button
+                          gap: '1rem', 
+                          // Set bottom margin
+                          marginBottom: '1rem', 
+                          // Disable wrapping to keep items in one row
+                          flexWrap: 'nowrap',
+                          // Space elements to keep drag handle fixed on the right
+                          justifyContent: 'space-between'
+                        // Close style object
+                        }}
+                      >
+                        <h3 
+                          // Set inline style for the card title header
+                          style={{ 
+                            // Enable flex layout for icon and text
+                            display: 'flex', 
+                            // Align items start vertically
+                            alignItems: 'flex-start', 
+                            // Set gap between emoji container and text
+                            gap: '0.75rem', 
+                            // Set text size
+                            fontSize: '24px', 
+                            // Reset default heading margins
+                            margin: 0,
+                            // Allow text to wrap nicely
+                            wordBreak: 'break-word',
+                            // Allow title to shrink to fit next to drag handle
+                            flexShrink: 1
+                          // End style object
+                          }}
+                        >
                           <div 
                             // Add styling for the emoji circular container
-                            style={{ fontSize: '1.5rem', background: idea.color || 'var(--surface-color)', padding: '0.5rem', borderRadius: '50%', border: `1px solid ${idea.color || 'var(--border-color)'}`, width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            style={{ flexShrink: 0, fontSize: '1.5rem', background: idea.color || 'var(--surface-color)', padding: '0.5rem', borderRadius: '50%', border: `1px solid ${idea.color || 'var(--border-color)'}`, width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                           >
                             {idea.emoji || '💡'}
                           {/* Close container */}
                           </div>
-                          {/* Render highlighted title */}
-                          {highlightText(idea.title, searchQuery)}
+                          {/* Wrap text in a span to apply padding to align with emoji */}
+                          <span style={{ paddingTop: '8px' }}>
+                            {/* Render highlighted title */}
+                            {highlightText(idea.title, searchQuery)}
+                          {/* Close span */}
+                          </span>
                         </h3>
+                        {/* Drag handle button next to the title */}
+                        <div 
+                          // Attach drag handle properties to this specific button
+                          {...provided.dragHandleProps}
+                          // Assign drag-handle CSS class for default styling rules
+                          className="drag-handle"
+                          // Apply layout and sizing attributes
+                          style={{
+                            // Control hand cursor during hover states
+                            cursor: snapshot.isDragging ? 'grabbing' : 'grab',
+                            // Specify explicit layout width
+                            width: '28px',
+                            // Specify explicit layout height
+                            height: '28px',
+                            // Set display flex
+                            display: 'flex',
+                            // Center content vertically
+                            alignItems: 'center',
+                            // Center content horizontally
+                            justifyContent: 'center',
+                            // Circular shape
+                            borderRadius: '50%',
+                            // Secondary text color for the dots symbol
+                            color: 'var(--text-secondary)',
+                            // Prevent selecting the dots text symbol
+                            userSelect: 'none',
+                            // Prevent button from shrinking
+                            flexShrink: 0,
+                            // Disable default touch action behavior
+                            touchAction: 'none'
+                          // Close style object
+                          }}
+                          // Descriptive label for screen reader users
+                          aria-label="Drag idea to reorder"
+                        // Close drag handle container
+                        >
+                          {/* Render standard drag handles vertical dots symbol */}
+                          ⋮⋮
+                        {/* Close drag handle element */}
+                        </div>
                       </div>
                       
                       {/* Render rich text safely */}
