@@ -1,3 +1,4 @@
+/* global process */
 // Import the defineConfig utility function from Vite
 import { defineConfig } from 'vite'
 // Import the Vite React plugin from the package
