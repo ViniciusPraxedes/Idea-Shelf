@@ -10,8 +10,6 @@ import Login from './components/Login'
 import IdeaList from './components/IdeaList'
 // Import the IdeaForm component
 import IdeaForm from './components/IdeaForm'
-// Import the database migration function
-import { migrateFromLocalStorage } from './services/database'
 // Import the main CSS file
 import './index.css'
 
@@ -138,13 +136,6 @@ function App() {
                 <span className="header-welcome">Welcome, {user.displayName || user.email || 'User'}</span>
                 {/* Header actions container */}
                 <div className="header-actions">
-                  {/* Temporary migration button */}
-                  <button className="btn-header" onClick={async () => {
-                    const result = await migrateFromLocalStorage();
-                    alert(`Successfully migrated ${result.count} ideas to production! Please refresh the page.`);
-                  }}>
-                    Import Data
-                  </button>
                   {/* Theme toggle button element */}
                   <button className="btn-header" onClick={() => setIsDarkMode(!isDarkMode)} aria-label="Toggle dark mode">
                     {/* Display text dynamically based on theme */}
