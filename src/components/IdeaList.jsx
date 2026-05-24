@@ -424,7 +424,24 @@ const IdeaList = ({ onEdit, searchQuery = '', showArchived = false, onRefresh, o
                       )}
                       
                       {/* Left-align the idea card action buttons horizontally and use dynamic border color variable */}
-                      <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-start', borderTop: '1px solid var(--border-color)', paddingTop: '1rem' }}>
+                      <div 
+                        // Set inline styles to control layout and wrap buttons
+                        style={{ 
+                          // Set display to flex for row layout
+                          display: 'flex', 
+                          // Set standard gap spacing between items
+                          gap: '0.5rem', 
+                          // Enable items wrapping on small viewports
+                          flexWrap: 'wrap', 
+                          // Align items to start horizontally
+                          justifyContent: 'flex-start', 
+                          // Add separation top border
+                          borderTop: '1px solid var(--border-color)', 
+                          // Add padding above button list
+                          paddingTop: '1rem' 
+                        // End style object
+                        }}
+                      >
                         {/* Archive or unarchive button */}
                         <button className="btn btn-ghost" onClick={() => handleArchiveClick(idea)}>
                           {/* Display toggle text only without emoji */}

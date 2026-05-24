@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
 
+/* Apply overflow rules to the root HTML element */
+html {
+  /* Prevent horizontal scrolling on the page */
+  overflow-x: hidden;
+/* Close HTML style block */
+}
+
 :root {
   --bg-color: #f7f9fb;
   --surface-color: rgba(255, 255, 255, 0.7);
