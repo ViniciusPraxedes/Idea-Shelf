@@ -243,40 +243,56 @@ const IdeaForm = ({ ideaToEdit, onSuccess, onCancel }) => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', gap: '0.5rem', flexWrap: 'wrap' }}>
               {/* Label for description input */}
               <label style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>Description</label>
-              {/* Button to explain idea using AI */}
-              <button
-                // Set the HTML button type to button to prevent form submission
-                type="button"
-                // Apply class names dynamically including loading state
-                className={`btn-ai-explain ${aiLoading ? 'loading' : ''}`}
-                // Bind click event to handleAIExplain handler function
-                onClick={handleAIExplain}
-                // Disable button when AI or form is loading
-                disabled={aiLoading}
-              // Close button properties
-              >
-                {/* Check if AI explanation is loading */}
-                {aiLoading ? (
-                  // React Fragment containing loading content
-                  <>
-                    {/* Shimmering spark emoji indicator */}
-                    <span className="spark-spinner">✨</span>
-                    {/* Spacing label for progress */}
-                    <span>Explaining...</span>
-                  {/* Close React Fragment */}
-                  </>
-                ) : (
-                  // React Fragment containing default content
-                  <>
-                    {/* Spark emoji indicating intelligence feature */}
-                    <span className="spark-emoji">✨</span>
-                    {/* Button text label */}
-                    <span>Explain with AI</span>
-                  {/* Close React Fragment */}
-                  </>
-                )}
-              {/* Close button */}
-              </button>
+              {/* Container for description actions */}
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                {/* Button to clear the description */}
+                <button
+                  // Set type to button
+                  type="button"
+                  // Bind click to clear description
+                  onClick={() => setDescription('')}
+                  // Apply inline styles for a subtle button
+                  style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.25rem 0.75rem', fontSize: '0.8rem', cursor: 'pointer', color: 'var(--text-secondary)' }}
+                >
+                  Clear
+                {/* Close clear button */}
+                </button>
+                {/* Button to explain idea using AI */}
+                <button
+                  // Set the HTML button type to button to prevent form submission
+                  type="button"
+                  // Apply class names dynamically including loading state
+                  className={`btn-ai-explain ${aiLoading ? 'loading' : ''}`}
+                  // Bind click event to handleAIExplain handler function
+                  onClick={handleAIExplain}
+                  // Disable button when AI or form is loading
+                  disabled={aiLoading}
+                // Close button properties
+                >
+                  {/* Check if AI explanation is loading */}
+                  {aiLoading ? (
+                    // React Fragment containing loading content
+                    <>
+                      {/* Shimmering spark emoji indicator */}
+                      <span className="spark-spinner">✨</span>
+                      {/* Spacing label for progress */}
+                      <span>Explaining...</span>
+                    {/* Close React Fragment */}
+                    </>
+                  ) : (
+                    // React Fragment containing default content
+                    <>
+                      {/* Spark emoji indicating intelligence feature */}
+                      <span className="spark-emoji">✨</span>
+                      {/* Button text label */}
+                      <span>Explain with AI</span>
+                    {/* Close React Fragment */}
+                    </>
+                  )}
+                {/* Close AI button */}
+                </button>
+              {/* Close actions container */}
+              </div>
             {/* Close flex container division */}
             </div>
             {/* Wrapper container for tracking focus states */}

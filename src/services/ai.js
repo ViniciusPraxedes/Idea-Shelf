@@ -14,14 +14,14 @@ export const explainIdea = async (title, tags, currentDescription) => {
   const prompt = [
     // Instruct the model to act as an assistant
     'You are an AI assistant helping a creator refine their project idea description.',
-    // Tell the model to rewrite to make it clearer and more professional
-    'Please rewrite the following project description to make it clearer, more professional, and better structured.',
+    // Tell the model to just formulate a short and punchy explanation
+    'Please formulate a short, punchy, and clear explanation of the user\'s idea.',
+    // Tell the model to not generate a full app description
+    'Do NOT generate a full app description, feature list, or marketing copy. Just improve the formulation of the idea in a few sentences.',
     // Direct it to use only clean HTML markup
-    'Use ONLY clean HTML markup: <p>, <strong>, <ul>, and <li> tags.',
+    'Use ONLY clean HTML markup: <p> and <strong> tags.',
     // Warn it against using markdown or code blocks
     'Do NOT use markdown, code blocks (such as ```html), or raw markdown formatting.',
-    // Direct it to keep it focused and of reasonable length
-    'Keep the explanation focused and of reasonable length, directly improving and expanding on the user\'s input.',
     // Provide the project title
     `Project Title: ${title}`,
     // Provide the project tags
